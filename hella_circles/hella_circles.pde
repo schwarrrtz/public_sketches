@@ -1,6 +1,6 @@
 final int rMin = 10;
 final int rMax = 30;
-final int vMin = 2;
+final int vMin = -5;
 final int vMax = 5;
 final int border = 50;
 
