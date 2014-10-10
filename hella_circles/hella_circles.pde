@@ -1,6 +1,6 @@
 // david schwartz
 // 10 october 2014
-// fuck complex analysis
+// fuck complex analysis    
 
 Circle[] circles;
 final int numCircles = 1000;
@@ -27,6 +27,11 @@ void draw()
       circles[i] = new Circle();
     }
     circles[i].render();
+  }
+  
+  if ((frameCount % 50) == 0)
+  {
+    println("frame rate:" + frameRate);
   }
 }
 
