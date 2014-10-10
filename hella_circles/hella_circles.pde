@@ -1,3 +1,36 @@
+// david schwartz
+// 10 october 2014
+// fuck complex analysis
+
+Circle[] circles;
+final int numCircles = 1000;
+
+void setup()
+{
+  size(1280, 720);
+  background(255);
+  
+  circles = new Circle[numCircles];
+  for(int i = 0; i < numCircles; i++)
+  {
+    circles[i] = new Circle();
+  }
+}
+
+void draw()
+{
+  for(int i = 0; i < numCircles; i++)
+  {
+    circles[i].update();
+    if(circles[i].offscreen)
+    {
+      circles[i] = new Circle();
+    }
+    circles[i].render();
+  }
+}
+
+// Circle constants
 final int rMin = 10;
 final int rMax = 30;
 final int vMin = -5;
@@ -35,33 +68,5 @@ class Circle
     {
       ellipse(x, y, r, r);
     }
-  }
-}
-
-Circle[] circles;
-final int numCircles = 1000;
-
-void setup()
-{
-  size(1280, 720);
-  background(255);
-  
-  circles = new Circle[numCircles];
-  for(int i = 0; i < numCircles; i++)
-  {
-    circles[i] = new Circle();
-  }
-}
-
-void draw()
-{
-  for(int i = 0; i < numCircles; i++)
-  {
-    circles[i].update();
-    if(circles[i].offscreen)
-    {
-      circles[i] = new Circle();
-    }
-    circles[i].render();
   }
 }
