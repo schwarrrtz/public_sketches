@@ -43,7 +43,7 @@ final int numCircles = 1000;
 
 void setup()
 {
-  size(1920, 1080);
+  size(1280, 720);
   background(255);
   
   circles = new Circle[numCircles];
