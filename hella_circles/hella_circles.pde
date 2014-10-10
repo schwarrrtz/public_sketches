@@ -7,7 +7,7 @@ final int numCircles = 1000;
 
 void setup()
 {
-  size(1280, 720);
+  size(1280, 720, P2D);
   background(255);
   
   circles = new Circle[numCircles];
@@ -47,6 +47,7 @@ class Circle
   float x, y, r;
   PVector v;
   boolean offscreen = false;
+  PShape c;
   
   Circle()
   {
@@ -54,12 +55,14 @@ class Circle
     y = random(-border, height);
     r = random(rMin, rMax);
     v = new PVector(random(vMin, vMax), random(vMin, vMax));
+    c = createShape(ELLIPSE, x, y, r, r);
   }
   
   void update()
   {
     x += v.x;
     y += v.y;
+    c.translate(v.x, v.y);
     
     if (((x-r) > width) || ((x+r) < -border) || ((y-r) > height) || ((y+r) < -border))
     {
@@ -71,7 +74,8 @@ class Circle
   {
     if(!offscreen)
     {
-      ellipse(x, y, r, r);
+      //ellipse(x, y, r, r);
+      shape(c);
     }
   }
 }
