@@ -39,11 +39,12 @@ class Circle
 }
 
 Circle[] circles;
-final int numCircles = 100;
+final int numCircles = 1000;
 
 void setup()
 {
-  size(640, 360);
+  size(1920, 1080);
+  background(255);
   
   circles = new Circle[numCircles];
   for(int i = 0; i < numCircles; i++)
