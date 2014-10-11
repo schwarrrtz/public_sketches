@@ -3,7 +3,8 @@
 // fuck complex analysis    
 
 Circle[] circles;
-final int numCircles = 1000;
+final int numCircles = 5000;
+boolean makeMoreCircles = true;
 
 void setup()
 {
@@ -23,7 +24,7 @@ void draw()
   for(int i = 0; i < numCircles; i++)
   {
     circles[i].update();
-    if(circles[i].offscreen)
+    if((circles[i].offscreen) && makeMoreCircles)
     {
       circles[i] = new Circle();
     }
@@ -36,11 +37,16 @@ void draw()
   }
 }
 
+void mouseClicked()
+{
+  makeMoreCircles = !makeMoreCircles;
+}
+
 // Circle 'class'
 final float rMin = 10;
 final float rMax = 30;
-final float vMin = -5;  
-final float vMax = 5;
+final float vMin = 3;  
+final float vMax = 6;
 final float border = 50;  // defines region where shapes are valid
 final int numShapes = 20;
 PShape[] shapes = new PShape[numShapes];
@@ -70,7 +76,19 @@ class Circle
     x = random(-border, width);
     y = random(-border, height);
     index = floor(random(0, numShapes));
-    v = new PVector(random(vMin, vMax), random(vMin, vMax));
+    float vX = random(vMin, vMax);
+    float vY = random(vMin, vMax);
+    float coinX = random(0, 1);
+    float coinY = random(0, 1);
+    if(coinX > 0.5)
+    {
+      vX *= -1;
+    }
+    if(coinY > 0.5)
+    {
+      vY *= -1;
+    }
+    v = new PVector(vX, vY);
   }
   
   void update()
