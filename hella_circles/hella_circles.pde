@@ -9,6 +9,7 @@ void setup()
 {
   size(1280, 720, P2D);
   background(255);
+  initializeCircleClass();
   
   circles = new Circle[numCircles];
   for(int i = 0; i < numCircles; i++)
@@ -35,36 +36,49 @@ void draw()
   }
 }
 
-// Circle constants
-final int rMin = 10;
-final int rMax = 30;
-final int vMin = -5;
-final int vMax = 5;
-final int border = 50;
+// Circle 'class'
+final float rMin = 10;
+final float rMax = 30;
+final float vMin = -5;  
+final float vMax = 5;
+final float border = 50;  // defines region where shapes are valid
+final int numShapes = 20;
+PShape[] shapes = new PShape[numShapes];
+float[] radii = new float[numShapes];
+    
+void initializeCircleClass()
+{
+  for(int i=0; i < numShapes; i++)   
+  {
+    float r = random(rMin, rMax);
+    radii[i] = r;
+    shapes[i] = createShape(ELLIPSE, 0, 0, r, r);
+  }
+}  
 
 class Circle
-{
-  float x, y, r;
+{ 
+  // instance variables
+  float x, y;
+  int index;
   PVector v;
   boolean offscreen = false;
-  PShape c;
   
+  // instance methods
   Circle()
   {
     x = random(-border, width);
     y = random(-border, height);
-    r = random(rMin, rMax);
+    index = floor(random(0, numShapes));
     v = new PVector(random(vMin, vMax), random(vMin, vMax));
-    c = createShape(ELLIPSE, x, y, r, r);
   }
   
   void update()
   {
     x += v.x;
     y += v.y;
-    c.translate(v.x, v.y);
     
-    if (((x-r) > width) || ((x+r) < -border) || ((y-r) > height) || ((y+r) < -border))
+    if (((x-radii[index]) > width) || ((x+radii[index]) < -border) || ((y-radii[index]) > height) || ((y+radii[index]) < -border))
     {
       offscreen = true;
     }
@@ -72,10 +86,6 @@ class Circle
   
   void render()
   {
-    if(!offscreen)
-    {
-      //ellipse(x, y, r, r);
-      shape(c);
-    }
+     shape(shapes[index], x, y);
   }
 }
