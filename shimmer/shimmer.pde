@@ -10,7 +10,7 @@ void setup()
   size(size_x, size_y, P2D);
   map = loadShape("inkscape_test.svg");
   water = loadShader("water_frag.glsl", "water_vert.glsl");
-  water.set("scale", 1.5);
+  water.set("scale", 2.5);
 }
 
 void draw()
@@ -26,5 +26,4 @@ void draw()
   shape(map, 0, 0, size_x, size_y);
   
   println(frameRate);
-  saveFrame();
 }
