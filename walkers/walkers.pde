@@ -14,7 +14,7 @@ class Walker
   {
     x = _x;
     y = _y;
-    c = color(random(0.6, 0.7), random(1.0), random(1.0), 0.1);
+    c = color(random(0.1, 0.35), random(1.0), random(1.0), 0.05);
   }
   
   void step()
@@ -36,7 +36,7 @@ Walker[] w = new Walker[1000];
 void setup()
 {
   size(640, 480);
-  background(255);
+  background(0);
   colorMode(HSB, 1.0);
   frameRate(10000);
   
@@ -53,4 +53,9 @@ void draw()
     w[i].step();
     w[i].display();
   }
+}
+
+void keyPressed()
+{
+  saveFrame("walkers-########.png");
 }
