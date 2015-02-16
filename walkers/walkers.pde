@@ -19,8 +19,8 @@ class Walker
   
   void step()
   {
-    float xInc = random(-2, 5);
-    float yInc = random(-2, 5);
+    float xInc = random(-0.5, 1.25);
+    float yInc = random(-0.5, 1.25);
     x += xInc; y += yInc;
     
     x%=(width+100); y%=(height+100);
