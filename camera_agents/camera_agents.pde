@@ -19,23 +19,25 @@ int alpha = 255; Knob knobAlpha;
 class Agent
 {
   float x,y;
-  color c;
+  color newColour, oldColour;
   
   Agent(float _x, float _y) {
     x = _x;
     y = _y; 
-    c = color(0, 0, 0);
+    newColour = oldColour = color(0, 0, 0);
   }
   
   void update() {
-    c = camera.get(int(x + random(-1*blurX, blurX)), int(y + random(-1*blurY, blurY)));
+    color c = camera.get(int(x + random(-1*blurX, blurX)), int(y + random(-1*blurY, blurY)));
+    newColour = lerpColor(oldColour, c, 0.5);
+    oldColour = c;
     x += random(speedX, pow(speedX,2)); x %= width;
     y += random(speedY, pow(speedY,2)); y %= height;
   }
   
   void display() {
-    fill(c, alpha);
-    stroke(c, alpha);
+    fill(newColour, alpha);
+    stroke(newColour, alpha);
     ellipse(x, y, sizeX, sizeY);
   }
 }
